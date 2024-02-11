@@ -17,3 +17,6 @@ Started from [Launch.nvim](https://github.com/LunarVim/Launch.nvim)
 * LazyGit
 
 ![Screenshot showing the nvim configuration](screenshot.png)
+
+Neovim running in a [Kitty](https://sw.kovidgoyal.net/kitty/) terminal on Mac OS using the [JetBrains Mono](https://www.nerdfonts.com/font-downloads) patched nerd font.
+
