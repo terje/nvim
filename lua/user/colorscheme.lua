@@ -9,6 +9,37 @@ function M.config()
 end
 
 -- local M = {
+--   "rose-pine/neovim",
+--   name = "rose-pine",
+--   priority = 1000,
+-- }
+--
+-- function M.config()
+--   vim.cmd.colorscheme "rose-pine"
+-- end
+
+-- local M = {
+--   "pauchiner/pastelnight.nvim",
+--   lazy = false,
+--   priority = 1000,
+--   opts = {},
+-- }
+--
+-- function M.config()
+--   vim.cmd.colorscheme "pastelnight"
+-- end
+
+-- local M = {
+--   "embark-theme/vim",
+--   name = "embark",
+--   priority = 1000,
+-- }
+--
+-- function M.config()
+--   vim.cmd.colorscheme "embark"
+-- end
+
+-- local M = {
 --   "rebelot/kanagawa.nvim",
 --   name = "kanagawa",
 --   priority = 1000,

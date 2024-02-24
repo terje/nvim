@@ -1,9 +1,3 @@
--- local function open_nvim_tree(data)
---   require("nvim-tree.api").tree.open()
--- end
---
--- vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
-
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
   callback = function()
     vim.cmd "set formatoptions-=cro"
@@ -81,14 +75,34 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
   end,
 })
 
-vim.api.nvim_create_augroup("neotree_autoopen", { clear = true })
-vim.api.nvim_create_autocmd("BufWinEnter", {
-  desc = "Open neo-tree on enter",
-  group = "neotree_autoopen",
-  callback = function()
-    if not vim.g.neotree_opened then
-      vim.cmd "Neotree show"
-      vim.g.neotree_opened = true
-    end
-  end,
-})
+--- Check if a plugin is defined in lazy. Useful with lazy loading
+--- when a plugin is not necessarily loaded yet.
+---@param plugin string The plugin to search for.
+---@return boolean available # Whether the plugin is available.
+function is_available(plugin)
+  local lazy_config_avail, lazy_config = pcall(require, "lazy.core.config")
+  return lazy_config_avail and lazy_config.spec.plugins[plugin] ~= nil
+end
+
+-- Update neotree when closing the git client.
+if is_available "neo-tree.nvim" then
+  vim.api.nvim_create_autocmd({ "TermClose" }, {
+    pattern = { "*lazygit", "*gitui" },
+    desc = "Refresh Neo-Tree git when closing lazygit/gitui",
+    callback = function()
+      local manager_avail, manager = pcall(require, "neo-tree.sources.manager")
+      if manager_avail then
+        for _, source in ipairs {
+          "filesystem",
+          "git_status",
+          "document_symbols",
+        } do
+          local module = "neo-tree.sources." .. source
+          if package.loaded[module] then
+            manager.refresh(require(module).name)
+          end
+        end
+      end
+    end,
+  })
+end

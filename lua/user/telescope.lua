@@ -2,7 +2,7 @@ local M = {
   "nvim-telescope/telescope.nvim",
   dependencies = {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make", lazy = true },
-    "nvim-telescope/telescope-ui-select.nvim"
+    "nvim-telescope/telescope-ui-select.nvim",
   },
 }
 
@@ -10,7 +10,7 @@ function M.config()
   local wk = require "which-key"
   wk.register {
     ["<leader><leader>"] = { "<cmd>Telescope find_files<cr>", "Find files" },
-    ["<leader>."] = { "<cmd>Telescope live_grep<cr>", "Find Text" },
+    ["<leader>."] = { "<cmd>Telescope live_grep<cr>", " Find Text" },
     ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
     ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
@@ -22,7 +22,6 @@ function M.config()
 
   local icons = require "user.icons"
   local actions = require "telescope.actions"
-
 
   require("telescope").setup {
     defaults = {
@@ -65,26 +64,22 @@ function M.config()
       live_grep = {
         theme = "dropdown",
         layout_config = {
-          vertical = { width = 0.8 }
-        }
+          vertical = { width = 0.8 },
+        },
       },
 
       grep_string = {
         theme = "dropdown",
         layout_config = {
-          vertical = { width = 0.8 }
-        }
+          vertical = { width = 0.8 },
+        },
       },
       find_files = {
         theme = "dropdown",
         previewer = false,
-        hidden = false,
+        hidden = true,
         path_display = { "absolute" },
-        layout_config = {
-          vertical = { width = 0.5 }
-        }
       },
-
       buffers = {
         theme = "dropdown",
         previewer = false,
@@ -96,6 +91,12 @@ function M.config()
           n = {
             ["dd"] = actions.delete_buffer,
           },
+        },
+      },
+      defaults = {
+        layout_config = {
+          vertical = { width = 0.8 },
+          -- other layout configuration here
         },
       },
 
@@ -136,13 +137,12 @@ function M.config()
         case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       },
       ["ui-select"] = {
-        require("telescope.themes").get_dropdown {
-        }
-      }
+        require("telescope.themes").get_dropdown {},
+      },
     },
   }
 
-  require("telescope").load_extension("ui-select")
+  require("telescope").load_extension "ui-select"
 end
 
 return M

@@ -26,10 +26,15 @@ M.on_attach = function(client, bufnr)
     vim.lsp.inlay_hint.enable(bufnr, true)
   end
 
+  print(client.name)
+
   if client.name == "eslint" then
     client.server_capabilities.document_formatting = true
     client.resolved_capabilities.document_formatting = true
   elseif client.name == "tsserver" then
+    client.server_capabilities.document_formatting = false
+    client.resolved_capabilities.document_formatting = false
+  elseif client.name == "typescript-tools" then
     client.server_capabilities.document_formatting = false
     client.resolved_capabilities.document_formatting = false
   end
@@ -50,24 +55,33 @@ function M.config()
   local wk = require "which-key"
   wk.register {
     ["<leader>ca"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    ["<leader>cp"] = { function() require("actions-preview").code_actions() end, "Code action preview" },
+    ["<leader>cp"] = {
+      function()
+        require("actions-preview").code_actions()
+      end,
+      "Code action preview",
+    },
     ["<leader>cA"] = {
       function()
-        vim.lsp.buf.code_action({
+        vim.lsp.buf.code_action {
           context = {
             only = {
               "source",
             },
             diagnostics = {},
           },
-        })
+        }
       end,
       "Source Action",
     },
     ["<leader>ci"] = { "<cmd>LspInfo<cr>", "Info" },
-    ["<leader>cj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
     ["<leader>ch"] = { "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
-    ["<leader>ck"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
+
+    -- ["<leader>cj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
+    -- ["<leader>ck"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
+    ["]d"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
+    ["[d"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
+
     ["<leader>cl"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     ["<leader>cq"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
     ["<leader>cr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
@@ -87,9 +101,8 @@ function M.config()
     "lua_ls",
     "cssls",
     "html",
-    "tsserver",
+    -- "tsserver",
     "eslint",
-    "tsserver",
     "pyright",
     "bashls",
     "jsonls",

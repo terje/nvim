@@ -10,7 +10,7 @@ function M.config()
 
   require("lualine").setup {
     options = {
-      theme = "catppuccin",
+      theme = "auto",
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
       ignore_focus = { "NvimTree" },
@@ -18,10 +18,12 @@ function M.config()
     sections = {
       lualine_a = {},
       lualine_b = { "branch" },
-      lualine_c = { {
-        "filename",
-        path = 1,
-      } },
+      lualine_c = {
+        {
+          "filename",
+          path = 1,
+        },
+      },
       lualine_d = { "diagnostics" },
       lualine_x = {
         "copilot",

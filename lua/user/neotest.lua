@@ -37,8 +37,8 @@ function M.config()
         cwd = function(path)
           return vim.fn.getcwd()
         end,
-        jest_test_discovery = false,
-        jestConfigFile = '',
+        -- jest_test_discovery = false,
+        -- jestConfigFile = '',
       },
       -- require "neotest-python" {
       --   dap = { justMyCode = false },

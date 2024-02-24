@@ -5,29 +5,19 @@ local M = {
 function M.config()
   local mappings = {
     q = { "<cmd>confirm q<CR>", "Quit" },
-    h = { "<cmd>nohlsearch<CR>", "NOHL" },
-    [";"] = { "<cmd>tabnew | terminal<CR>", "Term" },
-    v = { "<cmd>vsplit<CR>", "Split" },
-    b = { name = "Buffers" },
-    d = { name = "Debug" },
-    f = { name = "Find" },
-    g = { name = "Git" },
-    c = { name = "Code (LSP)" },
-    p = { name = "Plugins" },
-    t = { name = "Test" },
-    a = {
-      name = "Tab",
-      n = { "<cmd>$tabnew<cr>", "New Empty Tab" },
-      N = { "<cmd>tabnew %<cr>", "New Tab" },
-      o = { "<cmd>tabonly<cr>", "Only" },
-      h = { "<cmd>-tabmove<cr>", "Move Left" },
-      l = { "<cmd>+tabmove<cr>", "Move Right" },
-    },
+    b = { desc = " Buffers" },
+    d = { name = " Debug" },
+    e = { name = "󰙅 Neotree" },
+    f = { name = " Find" },
+    g = { name = "󰊢 Git" },
+    c = { name = " Code" },
+    p = { name = "󰐱 Plugins" },
+    t = { name = "󰙨 Test" },
     T = { name = "Treesitter" },
   }
 
-  local which_key = require "which-key"
-  which_key.setup {
+  local wk = require "which-key"
+  wk.setup {
     plugins = {
       marks = true,
       registers = true,
@@ -45,6 +35,7 @@ function M.config()
         g = false,
       },
     },
+    icons = { group = vim.g.icons_enabled and "" or "", separator = "" },
     window = {
       border = "rounded",
       position = "bottom",
@@ -59,7 +50,24 @@ function M.config()
     },
   }
 
-  which_key.register {
+  wk.register {
+    ["<ESC>"] = {
+      function()
+        if vim.fn.hlexists "Search" then
+          vim.cmd "nohlsearch"
+        else
+          vim.api.nvim_feedkeys(
+            vim.api.nvim_replace_termcodes("<ESC>", true, true, true),
+            "n",
+            true
+          )
+        end
+      end,
+      "Format",
+    }
+  }
+
+  wk.register {
     ["<leader>cf"] = {
       function()
         require("conform").format()
@@ -80,12 +88,20 @@ function M.config()
     },
   }
 
+  wk.register {
+    ["<leader>a"] = { function() require("neural").prompt() end, " Ask ChatGPT" },
+  }
+
+  wk.register {
+    ["<leader>gg"] = { "<cmd>LazyGit<CR>", "LazyGit" },
+  }
+
   local opts = {
     mode = "n", -- NORMAL mode
     prefix = "<leader>",
   }
 
-  which_key.register(mappings, opts)
+  wk.register(mappings, opts)
 end
 
 return M

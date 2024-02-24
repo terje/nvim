@@ -11,19 +11,24 @@ local M = {
   end,
   event = "VeryLazy",
   keys = {
-    { "<leader>ce", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
+    { "<leader>cT", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
     { "<leader>cT", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
     {
-      "<leader>cv",
+      "<leader>cV",
       ":CopilotChatVisual",
       mode = "x",
       desc = "CopilotChat - Open in vertical split",
     },
     {
-      "<leader>cx",
+      "<leader>cP",
       ":CopilotChatInPlace<cr>",
       mode = "x",
       desc = "CopilotChat - Run in-place code",
+    },
+    {
+      "<leader>cF",
+      ":CopilotChatFixDiagnostic<cr>",
+      desc = "CopilotChat - Fix diagnostic",
     },
   },
 }
