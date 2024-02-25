@@ -108,19 +108,10 @@ function M.config()
       }),
     },
     formatting = {
-      fields = { "abbr", "kind", "menu" },
+      fields = { "abbr", "menu", "kind" },
       format = function(entry, vim_item)
         vim_item.menu = vim_item.kind
         vim_item.kind = icons.kind[vim_item.kind]
-
-        -- vim_item.menu = ({
-        --   nvim_lsp = "",
-        --   nvim_lua = "",
-        --   luasnip = "",
-        --   buffer = "",
-        --   path = "",
-        --   emoji = "",
-        -- })[entry.source.name]
 
         if entry.source.name == "emoji" then
           vim_item.kind = icons.misc.Smiley

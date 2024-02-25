@@ -26,8 +26,6 @@ M.on_attach = function(client, bufnr)
     vim.lsp.inlay_hint.enable(bufnr, true)
   end
 
-  print(client.name)
-
   if client.name == "eslint" then
     client.server_capabilities.document_formatting = true
     client.resolved_capabilities.document_formatting = true

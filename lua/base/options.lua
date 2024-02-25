@@ -1,8 +1,10 @@
 vim.opt.backup = false -- creates a backup file
+vim.opt.breakindent = true -- wrap indent to match line above
 vim.opt.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
-vim.opt.cmdheight = 1 -- more space in the neovim command line for displaying messages
+vim.opt.cmdheight = 0 -- more space in the neovim command line for displaying messages
 vim.opt.completeopt = { "menuone", "noselect", "noinsert" } -- mostly just for cmp
 vim.opt.conceallevel = 0 -- so that `` is visible in markdown files
+vim.opt.copyindent = true -- copy the previous indentation on autoindenting
 -- vim.opt.fileencoding = "utf-8" -- the encoding written to a file
 vim.opt.hlsearch = true -- highlight all matches on previous search pattern
 vim.opt.ignorecase = true -- ignore case in search patterns
@@ -29,7 +31,7 @@ vim.opt.number = true -- set numbered lines
 vim.opt.laststatus = 3
 vim.opt.showcmd = false
 vim.opt.ruler = false
-vim.opt.relativenumber = true -- set relative numbered lines
+vim.opt.relativenumber = false -- set relative numbered lines
 vim.opt.numberwidth = 4 -- set number column width to 2 {default 4}
 vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
 vim.opt.wrap = false -- display lines as one long line
@@ -38,7 +40,7 @@ vim.opt.sidescrolloff = 8
 vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
 vim.opt.title = false
 -- colorcolumn = "80",
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = "80"
 vim.opt.fillchars = vim.opt.fillchars + "eob: "
 vim.opt.fillchars:append {
   stl = " ",
@@ -49,6 +51,11 @@ vim.opt.shortmess:append "I"
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
+
+vim.g.big_file = { size = 1024 * 100, lines = 10000 } -- For files bigger than this, disable 'treesitter'.
+vim.g.inlay_hints_enabled = false -- Enable always show function parameter names.
+vim.g.lsp_signature_enabled = false -- Enable automatically showing lsp help as you write function parameters.
+vim.g.url_effect_enabled = true -- Highlight URLs with an underline effect.
 
 vim.g.netrw_banner = 0
 vim.g.netrw_mouse = 2

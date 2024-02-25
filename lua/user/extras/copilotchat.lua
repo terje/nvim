@@ -10,27 +10,6 @@ local M = {
     vim.notify "Please update the remote plugins by running ':UpdateRemotePlugins', then restart Neovim."
   end,
   event = "VeryLazy",
-  keys = {
-    { "<leader>cT", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-    { "<leader>cT", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-    {
-      "<leader>cV",
-      ":CopilotChatVisual",
-      mode = "x",
-      desc = "CopilotChat - Open in vertical split",
-    },
-    {
-      "<leader>cP",
-      ":CopilotChatInPlace<cr>",
-      mode = "x",
-      desc = "CopilotChat - Run in-place code",
-    },
-    {
-      "<leader>cF",
-      ":CopilotChatFixDiagnostic<cr>",
-      desc = "CopilotChat - Fix diagnostic",
-    },
-  },
 }
 
 return M

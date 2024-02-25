@@ -21,6 +21,29 @@ function M.config()
     window = {
       width = 30,
     },
+    sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+    source_selector = {
+      winbar = true,
+      content_layout = "center",
+      sources = {
+        {
+          source = "filesystem",
+          display_name = " File",
+        },
+        {
+          source = "buffers",
+          display_name = "󰈙 Bufs",
+        },
+        {
+          source = "git_status",
+          display_name = "󰊢 Git",
+        },
+        {
+          source = "diagnostics",
+          display_name = "󰒡 Diagnostic",
+        },
+      },
+    },
     filesystem = {
       bind_to_cwd = false,
       follow_current_file = { enabled = true },
@@ -43,7 +66,6 @@ function M.config()
         },
       },
     },
-    sources = { "filesystem", "buffers", "git_status", "document_symbols" },
     open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
     indent = {
       with_expanders = true, -- if nil and file nesting is enabled, will enable expanders

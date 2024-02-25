@@ -3,12 +3,15 @@ local M = {
 }
 
 function M.config()
+  local icons = require "user.icons"
+
   local mappings = {
+    a = { name = icons.misc.Squirrel .. "AI Tools" },
     q = { "<cmd>confirm q<CR>", "Quit" },
-    b = { desc = " Buffers" },
-    d = { name = " Debug" },
-    e = { name = "󰙅 Neotree" },
-    f = { name = " Find" },
+    b = { desc = icons.kind.File .. "Buffers" },
+    d = { name = icons.ui.Bug .. "Debug" },
+    e = { name = icons.ui.EmptyFolderOpen .. "Neotree" },
+    f = { name = icons.ui.Search .. "Find" },
     g = { name = "󰊢 Git" },
     c = { name = " Code" },
     p = { name = "󰐱 Plugins" },
@@ -50,22 +53,60 @@ function M.config()
     },
   }
 
+  -- General
+
   wk.register {
     ["<ESC>"] = {
       function()
         if vim.fn.hlexists "Search" then
           vim.cmd "nohlsearch"
         else
-          vim.api.nvim_feedkeys(
-            vim.api.nvim_replace_termcodes("<ESC>", true, true, true),
-            "n",
-            true
-          )
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<ESC>", true, true, true), "n", true)
         end
       end,
       "Format",
-    }
+    },
+    ["<leader><leader>"] = { "<cmd>Telescope find_files<cr>", icons.ui.FindFile .. " Find files" },
+    ["<leader>."] = { "<cmd>Telescope live_grep<cr>", icons.ui.Search .. "Find Text" },
   }
+  wk.register {
+    ["<leader>/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment line" },
+  }
+  wk.register {
+    ["<leader>/"] = { "<Plug>(comment_toggle_linewise_visual)", "Comment", mode = "v" },
+  }
+
+  -- a - AI and assistants
+
+  wk.register {
+    ["<leader>aa"] = {
+      function()
+        require("neural").prompt()
+      end,
+      "Ask ChatGPT",
+    },
+    ["<leader>ae"] = { "<cmd>CopilotChatExplain<cr>", icons.git.Copilot .. " Explain code" },
+    ["<leader>cf"] = { ":CopilotChatFixDiagnostic<cr>", icons.git.Copilot .. " Fix diagnostic" },
+    ["<leader>at"] = { "<cmd>CopilotChatTests<cr>", icons.git.Copilot .. " Generate tests" },
+    ["<leader>av"] = { ":CopilotChatVisual", icons.git.Copilot .. " Open in vertical split" },
+    ["<leader>aC"] = { ":CopilotChatInPlace<cr>", icons.git.Copilot .. " Chat" },
+  }
+
+  -- b - Buffers
+  wk.register {
+    ["<leader>bb"] = { "<cmd>Telescope buffers previewer=false<cr>", "Find" },
+    ["<leader>bp"] = { "<Cmd>BufferLineTogglePin<CR>", "Toggle pin" },
+    ["<leader>bP"] = { "<Cmd>BufferLineGroupClose ungrouped<CR>", "Delete non-pinned buffers" },
+    ["<leader>bo"] = { "<Cmd>BufferLineCloseOthers<CR>", "Delete other buffers" },
+    ["<leader>br"] = { "<Cmd>BufferLineCloseRight<CR>", "Delete buffers to the right" },
+    ["<leader>bl"] = { "<Cmd>BufferLineCloseLeft<CR>", "Delete buffers to the left" },
+    ["<S-h>"] = { "<Cmd>BufferLineCyclePrev<CR>", "Prev buffer" },
+    ["<S-l>"] = { "<Cmd>BufferLineCycleNext<CR>", "Next buffer" },
+    ["[b"] = { "<cmd>BufferLineCyclePrev<cr>", "Prev buffer" },
+    ["]b"] = { "<cmd>BufferLineCycleNext<cr>", "Next buffer" },
+  }
+
+  -- c - Code Actions
 
   wk.register {
     ["<leader>cf"] = {
@@ -74,23 +115,20 @@ function M.config()
       end,
       "Format",
     },
-    ["<leader>ce"] = { "<cmd>CopilotChatExplain<cr>", "CopilotChat - Explain code" },
-    ["<leader>cT"] = { "<cmd>CopilotChatTests<cr>", "CopilotChat - Generate tests" },
-    ["<leader>cv"] = {
-      ":CopilotChatVisual",
-      mode = "x",
-      desc = "CopilotChat - Open in vertical split",
-    },
-    ["<leader>cx"] = {
-      ":CopilotChatInPlace<cr>",
-      mode = "x",
-      desc = "CopilotChat - Run in-place code",
-    },
   }
 
+  -- f - Find & Search
+
   wk.register {
-    ["<leader>a"] = { function() require("neural").prompt() end, " Ask ChatGPT" },
+    ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+    ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
+    ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
+    ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
   }
+
+  -- g - Git
 
   wk.register {
     ["<leader>gg"] = { "<cmd>LazyGit<CR>", "LazyGit" },
