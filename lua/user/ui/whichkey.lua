@@ -12,8 +12,9 @@ function M.config()
     d = { name = icons.ui.Bug .. "Debug" },
     e = { name = icons.ui.EmptyFolderOpen .. "Neotree" },
     f = { name = icons.ui.Search .. "Find" },
-    g = { name = "󰊢 Git" },
     c = { name = " Code" },
+    g = { name = "󰊢 Git" },
+    m = { name = icons.misc.Run .. "Compiler" },
     p = { name = "󰐱 Plugins" },
     t = { name = "󰙨 Test" },
     T = { name = "Treesitter" },
@@ -122,16 +123,35 @@ function M.config()
   wk.register {
     ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+    ["<leader>fe"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
     ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
     ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
-    ["<leader>fr"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
+    ["<leader>fr"] = {
+      function()
+        require("spectre").toggle { path = vim.fn.expand "%:t:p" }
+      end,
+      "Replace in buffer",
+    },
+    ["<leader>fR"] = {
+      function()
+        require("spectre").toggle()
+      end,
+      "Replace in project",
+    },
   }
 
   -- g - Git
 
   wk.register {
     ["<leader>gg"] = { "<cmd>LazyGit<CR>", "LazyGit" },
+  }
+
+  -- m - Compiler (build and run)
+
+  wk.register {
+    ["<leader>mm"] = { "<cmd>OverseerToggle<CR>", "Toggle Build Results" },
+    ["<leader>mr"] = { "<cmd>OverseerRun<CR>", "Run ..." },
   }
 
   local opts = {
