@@ -55,7 +55,6 @@ function M.config()
   }
 
   -- General
-
   wk.register {
     ["<ESC>"] = {
       function()
@@ -78,7 +77,6 @@ function M.config()
   }
 
   -- a - AI and assistants
-
   wk.register {
     ["<leader>aa"] = {
       function()
@@ -108,7 +106,6 @@ function M.config()
   }
 
   -- c - Code Actions
-
   wk.register {
     ["<leader>cf"] = {
       function()
@@ -116,10 +113,10 @@ function M.config()
       end,
       "Format",
     },
+    ["<leader>ct"] = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
   }
 
   -- f - Find & Search
-
   wk.register {
     ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
@@ -142,16 +139,40 @@ function M.config()
   }
 
   -- g - Git
-
   wk.register {
     ["<leader>gg"] = { "<cmd>LazyGit<CR>", "LazyGit" },
+    ["<leader>gj"] = { "<cmd>lua require 'gitsigns'.next_hunk({navigation_message = false})<cr>", "Next Hunk" },
+    ["<leader>gk"] = { "<cmd>lua require 'gitsigns'.prev_hunk({navigation_message = false})<cr>", "Prev Hunk" },
+    ["<leader>gp"] = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+    ["<leader>gr"] = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+    ["<leader>gl"] = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+    ["<leader>gR"] = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+    ["<leader>gs"] = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+    ["<leader>gu"] = {
+      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+      "Undo Stage Hunk",
+    },
+    ["<leader>gd"] = {
+      "<cmd>Gitsigns diffthis HEAD<cr>",
+      "Git Diff",
+    },
   }
 
   -- m - Compiler (build and run)
-
   wk.register {
     ["<leader>mm"] = { "<cmd>OverseerToggle<CR>", "Toggle Build Results" },
     ["<leader>mr"] = { "<cmd>OverseerRun<CR>", "Run ..." },
+  }
+
+  -- t - Test
+  wk.register {
+    ["<leader>tt"] = { "<cmd>lua require'neotest'.run.run()<cr>", "Test Nearest" },
+    ["<leader>tT"] = { "<cmd>lua require'neotest'.run.run(vim.loop.cwd())<cr>", "Test All" },
+    ["<leader>ts"] = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle Summary" },
+    ["<leader>tf"] = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "Test File" },
+    ["<leader>td"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Debug Test" },
+    ["<leader>tS"] = { "<cmd>lua require('neotest').run.stop()<cr>", "Test Stop" },
+    ["<leader>ta"] = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach Test" },
   }
 
   local opts = {
