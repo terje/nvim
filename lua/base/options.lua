@@ -47,6 +47,8 @@ vim.opt.fillchars:append {
 }
 
 vim.opt.shortmess:append "c"
+vim.opt.shortmess:append "W"
+vim.opt.shortmess:append "s"
 vim.opt.shortmess:append "I"
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"

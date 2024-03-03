@@ -23,6 +23,15 @@ function M.config()
         height = "60%",
       },
     },
+    routes = {
+      { -- filter write messages "xxxL, xxxB"
+        filter = {
+          event = "msg_show",
+          find = "%dL",
+        },
+        opts = { skip = true },
+      },
+    },
   }
 end
 

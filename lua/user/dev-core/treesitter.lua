@@ -13,6 +13,7 @@ local M = {
   end,
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
+    "windwp/nvim-ts-autotag",
   },
 }
 
@@ -21,6 +22,9 @@ function M.config()
     ensure_installed = { "lua", "markdown", "markdown_inline", "bash", "python", "typescript", "tsx" },
     highlight = { enable = true },
     indent = { enable = true },
+    autotag = {
+      enable = true,
+    },
     textobjects = {
       select = {
         enable = true,
@@ -48,7 +52,7 @@ function M.config()
         -- mapping query_strings to modes.
         selection_modes = {
           ["@parameter.outer"] = "v", -- charwise
-          ["@function.outer"] = "V", -- linewise
+          ["@function.outer"] = "V",  -- linewise
           ["@class.outer"] = "<c-v>", -- blockwise
         },
         -- If you set this to `true` (default is `false`) then any textobject is
