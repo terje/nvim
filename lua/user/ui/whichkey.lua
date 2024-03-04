@@ -124,6 +124,7 @@ function M.config()
     ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
     ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
+    ["<leader>fn"] = { "<cmd>Telescope notify<cr>", "Notifications" },
     ["<leader>fr"] = {
       function()
         require("spectre").toggle { path = vim.fn.expand "%:t:p" }

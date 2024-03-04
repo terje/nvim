@@ -49,6 +49,7 @@ spec "user.dev.gitsigns"
 spec "user.dev.lazygit"
 spec "user.dev.neotest"
 spec "user.dev.overseer"
+spec "user.dev.refactoring"
 spec "user.dev.todo-comments"
 spec "user.dev.trouble"
 
