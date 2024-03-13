@@ -42,6 +42,8 @@ function M.config()
           ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
           -- You can also use captures from other query groups like `locals.scm`
           ["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+          ["iq"] = "@parameter.inner",
+          ["aq"] = "@parameter.outer",
         },
         -- You can choose the select mode (default is charwise 'v')
         --
@@ -80,7 +82,8 @@ function M.config()
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
           ["]m"] = "@function.outer",
-          ["]]"] = { query = "@class.outer", desc = "Next class start" },
+          ["]q"] = "@parameter.inner",
+          -- ["]]"] = { query = "@class.outer", desc = "Next class start" },
           --
           -- You can use regex matching (i.e. lua pattern) and/or pass a list in a "query" key to group multiple queires.
           ["]o"] = "@loop.*",
@@ -97,6 +100,7 @@ function M.config()
         },
         goto_previous_start = {
           ["[m"] = "@function.outer",
+          ["[q"] = "@parameter.inner",
           ["[["] = "@class.outer",
         },
         goto_previous_end = {
@@ -111,6 +115,14 @@ function M.config()
         },
         goto_previous = {
           ["[i"] = "@conditional.outer",
+        },
+      },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<C-space>",
+          node_incremental = "<C-space>",
+          node_decremental = "<C-]>",
         },
       },
     },

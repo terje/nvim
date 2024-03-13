@@ -49,12 +49,11 @@ function M.config()
     },
     pickers = {
       live_grep = {
-        theme = "dropdown",
+        theme = "ivy",
         layout_config = {
-          vertical = { width = 0.8 },
+          vertical = { width = 0.2 },
         },
       },
-
       grep_string = {
         theme = "dropdown",
         layout_config = {
@@ -62,41 +61,48 @@ function M.config()
         },
       },
       find_files = {
-        theme = "dropdown",
+        -- theme = "theme"
         previewer = false,
         hidden = true,
+        layout_config = {
+          vertical = { width = 0.5 },
+        },
         path_display = { "absolute" },
       },
-      buffers = {
-        theme = "dropdown",
-        previewer = false,
-        initial_mode = "normal",
-        mappings = {
-          i = {
-            ["<C-d>"] = actions.delete_buffer,
-          },
-          n = {
-            ["dd"] = actions.delete_buffer,
-          },
-        },
-      },
-      defaults = {
-        layout_config = {
-          vertical = { width = 0.8 },
-          -- other layout configuration here
-        },
-      },
-
+      --   buffers = {
+      --     theme = "dropdown",
+      --     previewer = false,
+      --     initial_mode = "normal",
+      --     mappings = {
+      --       i = {
+      --         ["<C-d>"] = actions.delete_buffer,
+      --       },
+      --       n = {
+      --         ["dd"] = actions.delete_buffer,
+      --       },
+      --     },
+      --   },
+      --   defaults = {
+      --     layout_config = {
+      --       vertical = { width = 0.8 },
+      --       -- other layout configuration here
+      --     },
+      --   },
+      --
       planets = {
         show_pluto = true,
         show_moon = true,
       },
-
       colorscheme = {
         enable_preview = true,
       },
 
       lsp_references = {
+        theme = "dropdown",
+        initial_mode = "normal",
+      },
+
+      notify = {
         theme = "dropdown",
         initial_mode = "normal",
       },
@@ -118,10 +124,10 @@ function M.config()
     },
     extensions = {
       fzf = {
-        fuzzy = true, -- false will only do exact matching
+        fuzzy = true,                   -- false will only do exact matching
         override_generic_sorter = true, -- override the generic sorter
-        override_file_sorter = true, -- override the file sorter
-        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+        override_file_sorter = true,    -- override the file sorter
+        case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
       },
       ["ui-select"] = {
         require("telescope.themes").get_dropdown {},

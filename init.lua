@@ -40,7 +40,7 @@ spec "user.dev-core.none-ls"
 spec "user.dev-core.schemastore"
 spec "user.dev-core.treesitter"
 spec "user.dev-core.ts-error-translator"
-spec "user.dev-core.typescript-tools"
+-- spec "user.dev-core.typescript-tools"
 
 -- User dev tools
 spec "user.dev.comment"
@@ -48,11 +48,13 @@ spec "user.dev.conform"
 spec "user.dev.diffview"
 spec "user.dev.gitsigns"
 spec "user.dev.lazygit"
+spec "user.dev.markdown-preview"
 spec "user.dev.neotest"
 spec "user.dev.overseer"
 spec "user.dev.refactoring"
 spec "user.dev.todo-comments"
 spec "user.dev.trouble"
+spec "user.dev.tsc"
 
 -- Colorschemes
 spec "colorschemes.catppuccin"

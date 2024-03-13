@@ -4,10 +4,11 @@ local M = {
     "nvim-lua/plenary.nvim",
     "neovim/nvim-lspconfig",
   },
+  event = "VeryLazy",
 }
 
 function M.config()
-  local api = require("typescript-tools.api")
+  local api = require "typescript-tools.api"
   require("typescript-tools").setup {
     settings = {
       tsserver_plugins = {
@@ -15,7 +16,7 @@ function M.config()
       },
     },
     handlers = {
-      ["textDocument/formatting"] = function() end
+      ["textDocument/formatting"] = function() end,
     },
   }
 end

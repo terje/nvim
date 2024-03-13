@@ -11,12 +11,13 @@ function M.config()
     b = { desc = icons.kind.File .. "Buffers" },
     d = { name = icons.ui.Bug .. "Debug" },
     e = { name = icons.ui.EmptyFolderOpen .. "Neotree" },
-    f = { name = icons.ui.Search .. "Find" },
-    c = { name = " Code" },
-    g = { name = "󰊢 Git" },
+    f = { name = icons.ui.Telescope .. "Find" },
+    c = { name = icons.misc.Code .. " Code" },
+    g = { name = icons.misc.Git .. "Git" },
+    -- l = { name = icons.misc.Package .. "Setup" },
     m = { name = icons.misc.Run .. "Compiler" },
-    p = { name = "󰐱 Plugins" },
-    t = { name = "󰙨 Test" },
+    p = { name = icons.misc.Plugins .. "Plugins" },
+    t = { name = icons.misc.Test .. "Test" },
     T = { name = "Treesitter" },
   }
 
@@ -30,13 +31,13 @@ function M.config()
         suggestions = 20,
       },
       presets = {
-        operators = false,
-        motions = false,
-        text_objects = false,
-        windows = false,
-        nav = false,
-        z = false,
-        g = false,
+        operators = true,
+        motions = true,
+        text_objects = true,
+        windows = true,
+        nav = true,
+        z = true,
+        g = true,
       },
     },
     icons = { group = vim.g.icons_enabled and "" or "", separator = "" },
@@ -68,6 +69,7 @@ function M.config()
     },
     ["<leader><leader>"] = { "<cmd>Telescope find_files<cr>", icons.ui.FindFile .. " Find files" },
     ["<leader>."] = { "<cmd>Telescope live_grep<cr>", icons.ui.Search .. "Find Text" },
+    ["<leader>w"] = { "<cmd>WhichKey<cr>", icons.diagnostics.Question .. " Which key" },
   }
   wk.register {
     ["<leader>/"] = { "<Plug>(comment_toggle_linewise_current)", "Comment line" },
@@ -80,12 +82,25 @@ function M.config()
   wk.register {
     ["<leader>aa"] = {
       function()
-        require("neural").prompt()
+        require("chatgpt").openChat()
       end,
       "Ask ChatGPT",
     },
-    ["<leader>ae"] = { "<cmd>CopilotChatExplain<cr>", icons.git.Copilot .. " Explain code" },
-    ["<leader>cf"] = { ":CopilotChatFixDiagnostic<cr>", icons.git.Copilot .. " Fix diagnostic" },
+    ["<leader>ae"] = {
+      function()
+        require("chatgpt").edit_with_instructions()
+      end,
+      "ChatGPT: Edit with instructions",
+      mode = "v",
+    },
+    ["<leader>af"] = { ":CopilotChatFixDiagnostic<cr>", icons.git.Copilot .. " Fix diagnostic" },
+    ["<leader>as"] = {
+      function()
+        require("chatgpt").summarize()
+      end,
+      "ChatGPT: Summarize",
+      mode = "v",
+    },
     ["<leader>at"] = { "<cmd>CopilotChatTests<cr>", icons.git.Copilot .. " Generate tests" },
     ["<leader>av"] = { ":CopilotChatVisual", icons.git.Copilot .. " Open in vertical split" },
     ["<leader>aC"] = { ":CopilotChatInPlace<cr>", icons.git.Copilot .. " Chat" },
@@ -159,10 +174,19 @@ function M.config()
     },
   }
 
+  -- l - Setup
+  wk.register {
+    ["<leader>l"] = { "<cmd>Lazy<CR>", icons.misc.Package .. "Lazy" },
+  }
+
   -- m - Compiler (build and run)
   wk.register {
     ["<leader>mm"] = { "<cmd>OverseerToggle<CR>", "Toggle Build Results" },
     ["<leader>mr"] = { "<cmd>OverseerRun<CR>", "Run ..." },
+  }
+
+  wk.register {
+    ["<leader>nx"] = { "<cmd>Telescope nx actions<CR>", "nx actions" },
   }
 
   -- t - Test
@@ -174,6 +198,12 @@ function M.config()
     ["<leader>td"] = { "<cmd>lua require('neotest').run.run({strategy = 'dap'})<cr>", "Debug Test" },
     ["<leader>tS"] = { "<cmd>lua require('neotest').run.stop()<cr>", "Test Stop" },
     ["<leader>ta"] = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach Test" },
+    ["<leader>to"] = {
+      function()
+        require("neotest").output_panel.toggle()
+      end,
+      "Toggle output panel",
+    },
   }
 
   local opts = {
