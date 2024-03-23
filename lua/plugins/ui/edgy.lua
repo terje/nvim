@@ -4,26 +4,29 @@ local M = {
 }
 
 function M.config()
-  require("edgy").setup({
+  require("edgy").setup {
     keys = {
       -- increase width
-      ["<c-Right>"] = function(win)
+      ["<c-w>>"] = function(win)
         win:resize("width", 2)
       end,
       -- decrease width
-      ["<c-Left>"] = function(win)
+      ["<c-w><lt>"] = function(win)
         win:resize("width", -2)
       end,
       -- increase height
-      ["<c-Up>"] = function(win)
+      ["<c-w>+"] = function(win)
         win:resize("height", 2)
       end,
       -- decrease height
-      ["<c-Down>"] = function(win)
+      ["<c-w>-"] = function(win)
         win:resize("height", -2)
       end,
     },
-  })
+    right = {
+      { ft = "codecompanion", title = "Code Companion Chat", size = { width = 0.45 } },
+    },
+  }
 end
 
 return M

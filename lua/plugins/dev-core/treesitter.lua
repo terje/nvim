@@ -19,7 +19,16 @@ local M = {
 
 function M.config()
   require("nvim-treesitter.configs").setup {
-    ensure_installed = { "lua", "markdown", "markdown_inline", "bash", "python", "typescript", "tsx" },
+    ensure_installed = {
+      "lua",
+      "markdown",
+      "markdown_inline",
+      "bash",
+      "python",
+      "typescript",
+      "tsx",
+      "yaml",
+    },
     highlight = { enable = true },
     indent = { enable = true },
     autotag = {
@@ -54,7 +63,7 @@ function M.config()
         -- mapping query_strings to modes.
         selection_modes = {
           ["@parameter.outer"] = "v", -- charwise
-          ["@function.outer"] = "V",  -- linewise
+          ["@function.outer"] = "V", -- linewise
           ["@class.outer"] = "<c-v>", -- blockwise
         },
         -- If you set this to `true` (default is `false`) then any textobject is

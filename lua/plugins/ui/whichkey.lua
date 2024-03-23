@@ -3,7 +3,7 @@ local M = {
 }
 
 function M.config()
-  local icons = require "user.icons"
+  local icons = require "lib.icons"
 
   local mappings = {
     a = { name = icons.misc.Squirrel .. "AI Tools" },
@@ -12,7 +12,7 @@ function M.config()
     d = { name = icons.ui.Bug .. "Debug" },
     e = { name = icons.ui.EmptyFolderOpen .. "Neotree" },
     f = { name = icons.ui.Telescope .. "Find" },
-    c = { name = icons.misc.Code .. " Code" },
+    c = { name = icons.misc.Code .. " Code" },
     g = { name = icons.misc.Git .. "Git" },
     -- l = { name = icons.misc.Package .. "Setup" },
     m = { name = icons.misc.Run .. "Compiler" },
@@ -129,13 +129,47 @@ function M.config()
       "Format",
     },
     ["<leader>ct"] = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" },
+    ["<leader>ca"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    ["<leader>cp"] = {
+      function()
+        require("actions-preview").code_actions()
+      end,
+      "Code action preview",
+    },
+    ["<leader>cA"] = {
+      function()
+        vim.lsp.buf.code_action {
+          context = {
+            only = {
+              "source",
+            },
+            diagnostics = {},
+          },
+        }
+      end,
+      "Source Action",
+    },
+    ["<leader>ci"] = { "<cmd>LspInfo<cr>", "Info" },
+    ["<leader>ch"] = { "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
+
+    -- ["<leader>cj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
+    -- ["<leader>ck"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
+    ["]d"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
+    ["[d"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
+
+    ["<leader>cl"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+    ["<leader>cq"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
+    ["<leader>cr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
   }
+  vim.keymap.set("n", "<leader>rn", ":IncRename ")
 
   -- f - Find & Search
   wk.register {
+    -- nnoremap gd :Neotree float reveal_file=<cfile> reveal_force_cwd<cr>
     ["<leader>fb"] = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     ["<leader>fc"] = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
     ["<leader>fe"] = { "<cmd>Telescope oldfiles<cr>", "Recent File" },
+    ["<leader>ff"] = { "<cmd>Neotree reveal<cr>", "Show file in tree" },
     ["<leader>fp"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
     ["<leader>fh"] = { "<cmd>Telescope help_tags<cr>", "Help" },
     ["<leader>fl"] = { "<cmd>Telescope resume<cr>", "Last Search" },
@@ -152,6 +186,7 @@ function M.config()
       end,
       "Replace in project",
     },
+    ["<leader>fs"] = { "<cmd>Telescope simulators run<cr>", "Simulators" },
   }
 
   -- g - Git
@@ -181,12 +216,18 @@ function M.config()
 
   -- m - Compiler (build and run)
   wk.register {
-    ["<leader>mm"] = { "<cmd>OverseerToggle<CR>", "Toggle Build Results" },
-    ["<leader>mr"] = { "<cmd>OverseerRun<CR>", "Run ..." },
-  }
-
-  wk.register {
-    ["<leader>nx"] = { "<cmd>Telescope nx actions<CR>", "nx actions" },
+    ["<leader>mq"] = {
+      require("user.expo").quit,
+      "Quit Expo Go",
+    },
+    ["<leader>me"] = {
+      require("user.expo").run,
+      "Expo Run",
+    },
+    ["<leader>mE"] = {
+      require("user.expo").cleanAndRun,
+      "Expo Uninstall & Run",
+    },
   }
 
   -- t - Test

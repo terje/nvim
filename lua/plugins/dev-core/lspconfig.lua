@@ -54,50 +54,8 @@ M.toggle_inlay_hints = function()
 end
 
 function M.config()
-  local wk = require "which-key"
-  wk.register {
-    ["<leader>ca"] = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    ["<leader>cp"] = {
-      function()
-        require("actions-preview").code_actions()
-      end,
-      "Code action preview",
-    },
-    ["<leader>cA"] = {
-      function()
-        vim.lsp.buf.code_action {
-          context = {
-            only = {
-              "source",
-            },
-            diagnostics = {},
-          },
-        }
-      end,
-      "Source Action",
-    },
-    ["<leader>ci"] = { "<cmd>LspInfo<cr>", "Info" },
-    ["<leader>ch"] = { "<cmd>lua require('user.lspconfig').toggle_inlay_hints()<cr>", "Hints" },
-
-    -- ["<leader>cj"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
-    -- ["<leader>ck"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
-    ["]d"] = { "<cmd>lua vim.diagnostic.goto_next()<cr>", "Next Diagnostic" },
-    ["[d"] = { "<cmd>lua vim.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
-
-    ["<leader>cl"] = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-    ["<leader>cq"] = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Quickfix" },
-    ["<leader>cr"] = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
-  }
-
-  wk.register {
-    ["<leader>la"] = {
-      name = "LSP",
-      a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action", mode = "v" },
-    },
-  }
-
   local lspconfig = require "lspconfig"
-  local icons = require "user.icons"
+  local icons = require "lib.icons"
 
   local servers = {
     "lua_ls",
@@ -116,9 +74,9 @@ function M.config()
       active = true,
       values = {
         { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-        { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-        { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-        { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+        { name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
+        { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
+        { name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
       },
     },
     virtual_text = false,

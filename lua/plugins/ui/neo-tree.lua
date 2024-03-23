@@ -15,7 +15,7 @@ function M.config()
     ["<leader>e"] = { "<cmd>Neotree toggle<cr>", "Toggle Neotree" },
   }
 
-  local icons = require "user.icons"
+  local icons = require "lib.icons"
 
   require("neo-tree").setup {
     window = {
@@ -46,7 +46,7 @@ function M.config()
     },
     filesystem = {
       bind_to_cwd = false,
-      follow_current_file = { enabled = true },
+      -- follow_current_file = { enabled = true },
       use_libuv_file_watcher = true,
     },
     default_component_configs = {

@@ -3,6 +3,7 @@ local M = {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
+  after = "catppuccin",
 }
 
 function M.config()
@@ -17,6 +18,7 @@ function M.config()
         },
       },
     },
+    highlights = require("catppuccin.groups.integrations.bufferline").get(),
   }
 end
 

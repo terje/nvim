@@ -7,7 +7,7 @@ local M = {
 }
 
 function M.config()
-  local icons = require "user.icons"
+  local icons = require "lib.icons"
   local actions = require "telescope.actions"
 
   require("telescope").setup {
