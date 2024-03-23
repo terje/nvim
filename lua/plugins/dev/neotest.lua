@@ -13,6 +13,8 @@ local M = {
     "rouge8/neotest-rust",
     "lawrence-laz/neotest-zig",
     "rcasia/neotest-bash",
+    "nvim-neotest/nvim-nio",
+    "antoinemadec/FixCursorHold.nvim",
   },
   lazy = true,
 }
@@ -22,7 +24,7 @@ function M.config()
   require("neotest").setup {
     adapters = {
       require "neotest-jest" {
-        jestCommand = "npm run test -- --passWithNoTests",
+        jestCommand = "yarn test --",
         env = { CI = true },
         cwd = function(path)
           return vim.fn.getcwd()
