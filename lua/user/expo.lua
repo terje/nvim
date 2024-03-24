@@ -22,6 +22,14 @@ local run = function(appName)
   end)
 end
 
+local map = function(tbl, func)
+  local newtbl = {}
+  for i, v in ipairs(tbl) do
+    newtbl[i] = func(v)
+  end
+  return newtbl
+end
+
 --- Select app name in a monorepo from a list
 -- Looks for all apps under ./apps directory
 -- @param callback function to call with selected app slug
