@@ -224,8 +224,14 @@ function M.config()
       require("user.expo").run,
       "Expo Run",
     },
-    ["<leader>mE"] = {
-      require("user.expo").cleanAndRun,
+    ["<leader>mu"] = {
+      function()
+        local expo = require "user.expo"
+        expo.uninstall(function()
+          vim.fn.notify "Expo app uninstalled"
+          expo.run()
+        end)
+      end,
       "Expo Uninstall & Run",
     },
   }

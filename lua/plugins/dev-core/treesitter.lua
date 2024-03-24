@@ -28,6 +28,10 @@ function M.config()
       "typescript",
       "tsx",
       "yaml",
+      "xml",
+      "http",
+      "json",
+      "graphql",
     },
     highlight = { enable = true },
     indent = { enable = true },
@@ -63,7 +67,7 @@ function M.config()
         -- mapping query_strings to modes.
         selection_modes = {
           ["@parameter.outer"] = "v", -- charwise
-          ["@function.outer"] = "V", -- linewise
+          ["@function.outer"] = "V",  -- linewise
           ["@class.outer"] = "<c-v>", -- blockwise
         },
         -- If you set this to `true` (default is `false`) then any textobject is
