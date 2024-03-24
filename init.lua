@@ -43,7 +43,7 @@ spec "plugins.dev-core.schemastore"
 spec "plugins.dev-core.treesitter"
 spec "plugins.dev-core.ts-error-translator"
 
--- Ineeractive dev toolsols
+-- Interactive dev toolsols
 spec "plugins.dev.comment"
 spec "plugins.dev.conform"
 spec "plugins.dev.diffview"
