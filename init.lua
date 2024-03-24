@@ -42,7 +42,6 @@ spec "plugins.dev-core.none-ls"
 spec "plugins.dev-core.schemastore"
 spec "plugins.dev-core.treesitter"
 spec "plugins.dev-core.ts-error-translator"
--- spec "plugins.dev-core.typescript-tools"
 
 -- Ineeractive dev toolsols
 spec "plugins.dev.comment"
