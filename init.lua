@@ -7,6 +7,7 @@ require "base.globals"
 -- Core behaviours
 spec "plugins.core.autopairs"
 spec "plugins.core.gittory"
+spec "plugins.core.tmux-navigation"
 spec "plugins.core.spectre"
 
 -- UI

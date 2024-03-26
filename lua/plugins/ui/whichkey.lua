@@ -234,6 +234,7 @@ function M.config()
       end,
       "Expo Uninstall & Run",
     },
+    ["<leader>mx"] = { "<cmd>source %<cr>", "Execute file" },
   }
 
   -- t - Test

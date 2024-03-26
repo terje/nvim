@@ -1,14 +1,14 @@
 local M = {}
 
-local async = require "plenary.async"
-
 --- Kill yarn app processes running from monorepo
 -- Matches all yarn start command with app name (eg `yarn app:start`)
 -- @param callback
 local kill = function(callback)
-  vim.fn.jobstart("kill $(pgrep -f 'yarn [^ ]+:start')", {
-    on_exit = callback,
-  })
+  vim.schedule(function()
+    vim.fn.jobstart("kill $(pgrep -f 'yarn [^ ]+:start')", {
+      on_exit = callback,
+    })
+  end)
 end
 
 --- Run expo app using Yarn
@@ -48,13 +48,13 @@ end
 --- Quit Expo Go on running iOS Simulators
 -- @param callback function to call when command finishes
 M.quit = function(callback)
-  require("simctl").terminate("host.exp.Exponent", callback)
+  require("simctl.api").terminate({ appId = "host.exp.Exponent" }, callback)
 end
 
 --- Uninstall Expo Go from running iOS Simulators
 -- @param callback function to call when command finishes
 M.uninstall = function(callback)
-  require("simctl").uninstall("host.exp.Exponent", callback)
+  require("simctl.api").uninstall({ appId = "host.exp.Exponent" }, callback)
 end
 
 M.run = function()
